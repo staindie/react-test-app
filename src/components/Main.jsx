@@ -1,44 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
-import youtube from '../apis/youtube';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 import Header from './Header';
+import { searchVideos, selectVideo } from '../store/actions';
 
 const { Sider, Content } = Layout;
 
 class Main extends React.Component {
-    state = {
-        defaultValue: 'Default text',
-        videos: [],
-        selectedVideo: null
-    };
-
-    handleSubmit = async (termFromSearchBar) => {
-        const response = await youtube.get('/search', {
-            params: { q: termFromSearchBar }
-        });
-        this.setState({
-            videos: response.data.items
-        })
-    };
-
-    handleVideoSelect = (video) => {
-        this.setState({selectedVideo: video})
-    };
 
     render() {
-        debugger;
+        const {
+            searchVideos, selectVideo, defaultValue, videos, selectedVideo
+        } = this.props;
+
         return (
             <Layout className="main">
-                <Header handleSubmit={this.handleSubmit} />
+                <Header defaultValue={defaultValue} handleSearch={searchVideos} />
                 <Layout className="main__content">
                     <Sider className="video-list">
-                        <VideoList handleVideoSelect={this.handleVideoSelect} videos={this.state.videos}/>
+                        <VideoList handleVideoSelect={selectVideo} videos={videos}/>
                     </Sider>
                     <Content>
-                        <VideoDetail video={this.state.selectedVideo}/>
+                        <VideoDetail video={selectedVideo}/>
                     </Content>
                 </Layout>
             </Layout>
@@ -47,5 +32,6 @@ class Main extends React.Component {
 }
 
 const mapStateToProps = state => ({ ...state });
+const mapDispatchToProps = { searchVideos, selectVideo };
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

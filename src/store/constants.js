@@ -12,3 +12,4 @@ export const api = axios.create({
 
 export const SEARCH_VIDEOS = 'SEARCH_VIDEOS';
 export const SEARCH_VIDEOS_SUCCEED = 'SEARCH_VIDEOS_SUCCEED';
+export const SELECT_VIDEO = 'SELECT_VIDEO';

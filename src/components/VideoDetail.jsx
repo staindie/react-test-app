@@ -3,18 +3,17 @@ import { Card }  from 'antd'
 
 const { Meta } = Card;
 
-const VideoDetail = ({video}) => {
-    if (!video) {
-        return <div>Loading ...</div>;
-    }
-
-    const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
-
-    return (
+const VideoDetail = ({ video }) => {
+    return video && (
         <Card
             className="video-player"
             cover={
-                <iframe className="video-player__iframe" src={videoSrc} allowFullScreen title='Video player'/>
+                <iframe
+                    className="video-player__iframe"
+                    src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                    allowFullScreen
+                    title='Video player'
+                />
             }
         >
             <Meta title={video.snippet.title} description={video.snippet.description} />
