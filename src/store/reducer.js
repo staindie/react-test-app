@@ -1,4 +1,4 @@
-import {SEARCH_VIDEOS_SUCCEED, SELECT_VIDEO} from './constants';
+import { SEARCH_VIDEOS_SUCCEED, SELECT_VIDEO } from './constants';
 
 export const initialState = {
     defaultValue: 'Default text',
@@ -7,7 +7,6 @@ export const initialState = {
 };
 
 export function reducer(state, { type, payload }) {
-    debugger;
     switch(type) {
         case SEARCH_VIDEOS_SUCCEED:
             return { ...state, videos: payload };
